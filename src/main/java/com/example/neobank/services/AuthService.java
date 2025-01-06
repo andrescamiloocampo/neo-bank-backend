@@ -25,7 +25,7 @@ public class AuthService {
         Balance balance = new Balance();
         balance.setUser(user);
         balance.setTotalAmount(0);
-        balance.setAccountType("Cuenta de Ahorros");
+        balance.setAccountType("Savings Account");
         balance.setAccount_number(generateRandomAccountNumber());
 
         user.addBalance(balance);
