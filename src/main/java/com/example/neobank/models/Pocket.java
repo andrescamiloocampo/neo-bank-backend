@@ -64,4 +64,12 @@ public class Pocket {
     public void setBalance(Balance balance) {
         this.balance = balance;
     }
+
+    public void substractAmount(long amount){
+        this.sub_amount -= amount;
+    }
+
+    public void addAmount(long amount){
+        this.sub_amount += amount;
+    }
 }

@@ -46,7 +46,7 @@ public class AuthService {
 
     private String generateRandomAccountNumber() {
         Random random = new Random();
-        long accountNumber = 1_000_000_000L + (long)(random.nextDouble() * 9_000_000_000L); // Rango: 1000000000 - 9999999999
+        long accountNumber = 1_000_000_000L + (long)(random.nextDouble() * 9_000_000_000L);
         return String.valueOf(accountNumber);
     }
 }

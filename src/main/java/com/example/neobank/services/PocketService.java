@@ -56,4 +56,8 @@ public class PocketService {
         return pocketRepository.findById(id).orElseThrow(()->new RuntimeException("Pocket not found"));
     }
 
+    public Pocket getPocketInBalance(String pocket_id, String balance_id){
+        return pocketRepository.findPocketBalance(pocket_id,balance_id);
+    }
+
 }

@@ -13,4 +13,10 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     @Query("SELECT u FROM User u LEFT JOIN FETCH u.balance WHERE u.username = :username")
     User findByUsernameWithBalance(@Param("username") String username);
+
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.balance WHERE u.id = :id")
+    User findByByIdWithBalance(@Param("id") UUID id);
+
+    @Query(value = "SELECT * FROM users WHERE username like %:username% or name like %:username% limit 10",nativeQuery = true)
+    User[] findUsersByUsername(@Param("username") String username);
 }
