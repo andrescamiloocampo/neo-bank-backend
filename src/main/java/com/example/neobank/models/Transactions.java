@@ -1,5 +1,6 @@
 package com.example.neobank.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -35,12 +36,13 @@ public class Transactions {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id",referencedColumnName = "id",insertable = false,updatable = false)
+    @JsonBackReference
     private User user;
 
     @Column(name = "user_id",nullable = false)
     private UUID userId;
 
-    public Transactions() {
+    public  Transactions() {
     }
 
     public Transactions(UUID id, String transaction_type,String account_type, long amount, Date timestamp, String description, UUID userId,String fromAccount,String fromPocket) {

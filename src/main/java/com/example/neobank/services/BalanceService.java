@@ -28,7 +28,6 @@ public class BalanceService {
     @Autowired
     PocketRepository pocketRepository;
 
-
     @Transactional
     public Balance transferMoney(String receiverName, Transactions transaction, String senderAccountType) {
         try {
@@ -38,20 +37,23 @@ public class BalanceService {
             if (transaction.getAccount_type().equals("Pocket")) {
                 Pocket senderPocket = pocketService.getPocketInBalance(transaction.getFromAccount(), transaction.getFromPocket());
                 if (senderPocket != null) {
+                    // Transactions receiverTransaction = new Transactions(UUID.randomUUID(),"Income",transaction.getAccount_type(),transaction.getAmount(),transaction.getTimestamp(),transaction.getDescription(),receiver.getId(), transaction.getFromAccount(), transaction.getFromPocket());
                     senderPocket.substractAmount(transaction.getAmount());
                     receiver.addAmount(transaction.getAmount());
                     balanceRepository.save(receiver);
                     pocketRepository.save(senderPocket);
                     transactionsRepository.save(transaction);
+                    // transactionsRepository.save(receiverTransaction);
 
                     return sender;
                 }
                 return sender;
             }
-
+            // Transactions receiverTransaction = new Transactions(UUID.randomUUID(),"Income",transaction.getAccount_type(),transaction.getAmount(),transaction.getTimestamp(),transaction.getDescription(),receiver.getId(), transaction.getFromAccount(), transaction.getFromPocket());
             sender.subtractAmount(transaction.getAmount());
             receiver.addAmount(transaction.getAmount());
 
+            // transactionsRepository.save(receiverTransaction);
             transactionsRepository.save(transaction);
             balanceRepository.save(sender);
             balanceRepository.save(receiver);
@@ -61,6 +63,4 @@ public class BalanceService {
             throw new RuntimeException("Transaction failed: " + e.getMessage(), e);
         }
     }
-
-
 }

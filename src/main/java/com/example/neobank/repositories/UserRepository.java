@@ -1,7 +1,9 @@
 package com.example.neobank.repositories;
 
 import com.example.neobank.models.User;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -19,4 +21,9 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     @Query(value = "SELECT * FROM users WHERE username like %:username% or name like %:username% limit 10",nativeQuery = true)
     User[] findUsersByUsername(@Param("username") String username);
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE users SET user_image = :userImage WHERE username = :username",nativeQuery = true)
+    void updateUserImage(@Param("userImage") String userImage,@Param("username") String username);
 }

@@ -29,6 +29,9 @@ public class User {
     @Column(name = "lastname", nullable = false, length = 50)
     private String lastname;
 
+    @Column(name = "userImage", nullable = true)
+    private String userImage;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Balance> balance = new ArrayList<>();
@@ -41,7 +44,7 @@ public class User {
         this.password = password;
     }
 
-    public User(UUID id, String username, String name, String lastname, String email, String password, List<Balance> balance) {
+    public User(UUID id, String username, String name, String lastname, String email, String password, List<Balance> balance,String userImage) {
         this.id = id;
         this.username = username;
         this.name = name;
@@ -49,6 +52,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.balance = balance != null ? balance : new ArrayList<>();
+        this.userImage = userImage;
     }
 
     public UUID getId() {
@@ -105,6 +109,14 @@ public class User {
 
     public void setBalance(List<Balance> balance) {
         this.balance = balance;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 
     public void addBalance(Balance balance) {

@@ -5,7 +5,6 @@ import com.example.neobank.models.Balance;
 import com.example.neobank.models.User;
 import com.example.neobank.repositories.UserRepository;
 import com.example.neobank.services.UserService;
-import com.example.neobank.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,5 +47,10 @@ public class userController {
     @GetMapping("/getUsersByUsername")
     public User[] getUsersByUsername(@RequestParam(name = "username") String username){
         return userService.getUsersByUsername(username);
+    }
+
+    @PutMapping("/updateUserImage")
+    public void updateUserImage(@RequestParam(name = "userImage") String userImage, @RequestParam(name = "username") String username){
+        userService.updateUserImage(userImage,username);
     }
 }

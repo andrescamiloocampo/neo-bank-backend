@@ -45,4 +45,7 @@ public class UserService {
         return userRepository.findUsersByUsername(username);
     }
 
+    public void updateUserImage(String userImage, String username){
+        userRepository.updateUserImage(userImage,username);
+    }
 }
